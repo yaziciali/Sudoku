@@ -24,7 +24,7 @@ namespace Sudoku
         private void Form1_Load(object sender, EventArgs e)
         {
             Pano1.YeniDegerlerYukle();
-            Pano1.ilk_degerleri_goster(100);
+            Pano1.ilk_degerleri_goster(70);
             label1.Text = "Yeni Oyun Başladı.";
             timer1.Enabled = true;
         }
@@ -57,7 +57,7 @@ namespace Sudoku
             {
                 // Highlight the wrong inputs 
                 HataliHucreler.ForEach(x => x.ForeColor = Color.Red);
-                label1.Text = "Hataları kontrol edin.";
+                label1.Text = "Hataları ve boşları kontrol ediniz.";
                 timer1.Enabled = true;
             }
             else
@@ -74,16 +74,45 @@ namespace Sudoku
             timer1.Enabled = false;
         }
 
-        private void YeniOyunTusu1_Click(object sender, EventArgs e)
-        {
-            Pano1.YeniDegerlerYukle();
-            Pano1.ilk_degerleri_goster(80);
-        }
+
 
         private void YeniOyunTusu2_Click(object sender, EventArgs e)
         {
+            int i = 0;
+            int.TryParse(OrneklemSayisi.Text, out i);
+            if (i <= 20 || i >= 80)
+            {
+                label1.Text = "20 ile 80 arası giriniz.";
+                timer1.Enabled = true;
+                OrneklemSayisi.Text = "40";
+                return;
+            }
+
             Pano1.YeniDegerlerYukle();
-            Pano1.ilk_degerleri_goster(40);
+
+            int.TryParse(OrneklemSayisi.Text, out i);
+            Pano1.ilk_degerleri_goster(i);
         }
+
+        private void OrneklemSayisi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(OrneklemSayisi.Text, "[^0-9]"))
+            {
+                label1.Text = "Lütfen sadece sayı giriniz.";
+                timer1.Enabled = true;
+                OrneklemSayisi.Text = "40";
+            }
+
+            int i = 0;
+            int.TryParse(OrneklemSayisi.Text, out i);
+               if (i <= 20 || i >= 80){
+                label1.Text = "20 ile 80 arası giriniz.";
+                timer1.Enabled = true;
+                OrneklemSayisi.Text = "40";
+            }
+
+        }
+
+
     }
 }

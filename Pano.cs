@@ -10,7 +10,8 @@ namespace Sudoku
 {
     class Pano : Panel
     {
-        public Hucre[,] Hucreler = new Hucre[9, 9];
+        private const int BOYUT = 9;
+        public Hucre[,] Hucreler = new Hucre[BOYUT, BOYUT];
         private Random random = new();
 
         public Pano() 
@@ -19,9 +20,9 @@ namespace Sudoku
         }
         public void HucreleriOlustur()
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < BOYUT; i++)
             {
-                for (int j = 0; j < 9; j++)
+                for (int j = 0; j < BOYUT; j++)
                 {
                     // 81 hücre oluştur.
                     Hucreler[i, j] = new Hucre();
@@ -68,15 +69,30 @@ namespace Sudoku
 
         public void ilk_degerleri_goster(int orneklem)
         {
-            for (int i = 0; i < orneklem; i++)
+            List<int>[] Sayilar = new List<int>[BOYUT]; //{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int toplam = 0;
+            int X = 0;
+            var RY = 0; // Random Y
+
+            for (int k = 0; k < BOYUT; k++)
             {
-                var RX = random.Next(9);
-                var RY = random.Next(9);
-                int Deger = Hucreler[RX, RY].Degeri;
-                Hucreler[RX, RY].Text = Deger.ToString();
-                Hucreler[RX, RY].ForeColor = Color.Black;
-                Hucreler[RX, RY].Kilitli = true;
+                Sayilar[k] = new List<int> { 0,1, 2, 3, 4, 5, 6, 7, 8 };
             }
+
+            while (toplam <= orneklem) {
+
+
+                RY = Sayilar[X][random.Next(0, Sayilar[X].Count)];
+                    int Deger = Hucreler[X, RY].Degeri;
+                    Hucreler[X, RY].Text = Deger.ToString();
+                    Hucreler[X, RY].ForeColor = Color.Black;
+                    Hucreler[X, RY].Kilitli = true;
+                Sayilar[X].Remove(RY);
+                toplam++;
+                X++;
+                if (X == BOYUT) X = 0;
+            }
+
         }
 
         public void YeniDegerlerYukle()
@@ -93,11 +109,11 @@ namespace Sudoku
         private bool BirSonrakiDegerBul(int i, int j)
         {
 
-            if (++j > 8)
+            if (++j >= BOYUT)
             {
                 j = 0;
                 //Satır bittiğinde çık
-                if (++i > 8)
+                if (++i >= BOYUT)
                     return true;
             }
 
@@ -128,7 +144,7 @@ namespace Sudoku
 
         private bool Gecerlimi(int sayi, int x, int y)
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < BOYUT; i++)
             {
                 if (i != y && Hucreler[x, i].Degeri == sayi)
                     return false;
