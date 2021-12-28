@@ -23,7 +23,10 @@ namespace Sudoku
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Pano1.YeniDegerlerYukle();
+            Pano1.ilk_degerleri_goster(100);
+            label1.Text = "Yeni Oyun Başladı.";
+            timer1.Enabled = true;
         }
 
         private void TemizleTusu_Click(object sender, EventArgs e)
@@ -73,14 +76,14 @@ namespace Sudoku
 
         private void YeniOyunTusu1_Click(object sender, EventArgs e)
         {
-            Pano1.DegerleriYukle();
-            Pano1.ilk_degerleri_goster(40);
+            Pano1.YeniDegerlerYukle();
+            Pano1.ilk_degerleri_goster(80);
         }
 
         private void YeniOyunTusu2_Click(object sender, EventArgs e)
         {
-            Pano1.DegerleriYukle();
-            Pano1.ilk_degerleri_goster(20);
+            Pano1.YeniDegerlerYukle();
+            Pano1.ilk_degerleri_goster(40);
         }
     }
 }

@@ -79,7 +79,7 @@ namespace Sudoku
             }
         }
 
-        public void DegerleriYukle()
+        public void YeniDegerlerYukle()
         {
             foreach (var h in Hucreler)
             {
