@@ -100,6 +100,7 @@ namespace Sudoku
             this.OrneklemSayisi.Text = "40";
             this.OrneklemSayisi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.OrneklemSayisi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OrneklemSayisi_KeyPress);
+            this.OrneklemSayisi.Leave += new System.EventHandler(this.OrneklemSayisi_Leave);
             // 
             // label2
             // 
@@ -114,7 +115,7 @@ namespace Sudoku
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 563);
+            this.ClientSize = new System.Drawing.Size(689, 578);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.OrneklemSayisi);
             this.Controls.Add(this.label1);

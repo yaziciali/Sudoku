@@ -25,6 +25,7 @@ namespace Sudoku
         {
             Pano1.YeniDegerlerYukle();
             Pano1.Ilk_Degerleri_Goster(50);
+            label1.ForeColor = Color.Blue;
             label1.Text = "Yeni Oyun Başladı.";
             timer1.Enabled = true;
         }
@@ -57,12 +58,14 @@ namespace Sudoku
             {
                 // Highlight the wrong inputs 
                 HataliHucreler.ForEach(x => x.ForeColor = Color.Red);
+                label1.ForeColor = Color.Red;
                 label1.Text = "Hataları ve boşları kontrol ediniz.";
                 timer1.Enabled = true;
             }
             else
             {
                 MessageBox.Show("Kazandınız");
+                label1.ForeColor = Color.Blue;
                 label1.Text = "Kazandınız";
                 timer1.Enabled = true;
             }
@@ -82,6 +85,7 @@ namespace Sudoku
             int.TryParse(OrneklemSayisi.Text, out i);
             if (i <= 20 || i >= 80)
             {
+                label1.ForeColor = Color.Red;
                 label1.Text = "20 ile 80 arası giriniz.";
                 timer1.Enabled = true;
                 OrneklemSayisi.Text = "40";
@@ -96,23 +100,41 @@ namespace Sudoku
 
         private void OrneklemSayisi_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(OrneklemSayisi.Text, "[^0-9]"))
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
+                e.Handled = true;
+                label1.ForeColor = Color.Red;
                 label1.Text = "Lütfen sadece sayı giriniz.";
                 timer1.Enabled = true;
-                OrneklemSayisi.Text = "40";
+            } else if (!char.IsControl(e.KeyChar))
+            {
+                int i = 0;
+                int.TryParse(OrneklemSayisi.Text, out i);
+                if (i >= 80)
+                {
+                    label1.ForeColor = Color.Red;
+                    label1.Text = "20 ile 80 arası giriniz.";
+                    timer1.Enabled = true;
+                    e.Handled = true;
+                }
             }
 
+
+
+        }
+
+        private void OrneklemSayisi_Leave(object sender, EventArgs e)
+        {
             int i = 0;
             int.TryParse(OrneklemSayisi.Text, out i);
-               if (i <= 20 || i >= 80){
+            if (i <= 20 || i >= 80)
+            {
+                label1.ForeColor = Color.Red;
                 label1.Text = "20 ile 80 arası giriniz.";
                 timer1.Enabled = true;
                 OrneklemSayisi.Text = "40";
             }
-
         }
-
-
     }
 }
