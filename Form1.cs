@@ -24,7 +24,7 @@ namespace Sudoku
         private void Form1_Load(object sender, EventArgs e)
         {
             Pano1.YeniDegerlerYukle();
-            Pano1.ilk_degerleri_goster(70);
+            Pano1.Ilk_Degerleri_Goster(50);
             label1.Text = "Yeni Oyun Başladı.";
             timer1.Enabled = true;
         }
@@ -91,7 +91,7 @@ namespace Sudoku
             Pano1.YeniDegerlerYukle();
 
             int.TryParse(OrneklemSayisi.Text, out i);
-            Pano1.ilk_degerleri_goster(i);
+            Pano1.Ilk_Degerleri_Goster(i);
         }
 
         private void OrneklemSayisi_KeyPress(object sender, KeyPressEventArgs e)

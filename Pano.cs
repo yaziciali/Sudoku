@@ -25,7 +25,7 @@ namespace Sudoku
                 for (int j = 0; j < BOYUT; j++)
                 {
                     // 81 hücre oluştur.
-                    Hucreler[i, j] = new Hucre();
+                    Hucreler[i, j] = new Hucre() { X = i, Y = j, Kilitli = false };
                     Hucreler[i, j].Font = new Font(SystemFonts.DefaultFont.FontFamily, 18);
                     Hucreler[i, j].Size = new Size(50, 50);
                     Hucreler[i, j].ForeColor = SystemColors.ControlDarkDark;
@@ -33,11 +33,10 @@ namespace Sudoku
                     Hucreler[i, j].BackColor = ((i / 3) + (j / 3)) % 2 == 0 ? SystemColors.Control : Color.LightGray;
                     Hucreler[i, j].FlatStyle = FlatStyle.Flat;
                     Hucreler[i, j].FlatAppearance.BorderColor = Color.Black;
-                    Hucreler[i, j].X = i;
-                    Hucreler[i, j].Y = j;
+
 
                     // Her bir hücre için tanımla
-                    Hucreler[i, j].KeyPress += hucre_isaretlendi;
+                    Hucreler[i, j].KeyPress += Hucre_Isaretlendi;
 
                     this.Controls.Add(Hucreler[i, j]);
                 }
@@ -45,14 +44,14 @@ namespace Sudoku
         }
 
 
-        private void hucre_isaretlendi(object nesne, KeyPressEventArgs args)
+        private void Hucre_Isaretlendi(object nesne, KeyPressEventArgs args)
         {
             var SeciliHucre = nesne as Hucre;
 
             //Hücre kilitli ise bir şey yapmadan çık
             if (SeciliHucre.Kilitli) return;
 
-            int Sayi;
+            int Sayi = 0;
 
             // Yazılan sadece sayı olmalı
             if(int.TryParse(args.KeyChar.ToString(), out Sayi))
@@ -67,7 +66,7 @@ namespace Sudoku
 
         }
 
-        public void ilk_degerleri_goster(int orneklem)
+        public void Ilk_Degerleri_Goster(int orneklem)
         {
             List<int>[] Sayilar = new List<int>[BOYUT]; //{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             int toplam = 0;
@@ -130,11 +129,11 @@ namespace Sudoku
                     return false;
                 }
 
-                // Take a random number from the numbers left in the list
+                // Listeden rasgele bir değer al
                 Sayi = Sayilar[random.Next(0, Sayilar.Count)];
                 Hucreler[i, j].Degeri = Sayi;
 
-                // Remove the allocated value from the list
+                // Alınan değeri listeden çıkar
                 Sayilar.Remove(Sayi);
             }
             while (!Gecerlimi(Sayi, i, j) || !BirSonrakiDegerBul(i, j));

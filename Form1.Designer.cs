@@ -42,7 +42,7 @@ namespace Sudoku
             // 
             // KontrolTusu
             // 
-            this.KontrolTusu.Location = new System.Drawing.Point(232, 516);
+            this.KontrolTusu.Location = new System.Drawing.Point(318, 516);
             this.KontrolTusu.Name = "KontrolTusu";
             this.KontrolTusu.Size = new System.Drawing.Size(94, 43);
             this.KontrolTusu.TabIndex = 1;
@@ -52,7 +52,7 @@ namespace Sudoku
             // 
             // TemizleTusu
             // 
-            this.TemizleTusu.Location = new System.Drawing.Point(449, 516);
+            this.TemizleTusu.Location = new System.Drawing.Point(501, 516);
             this.TemizleTusu.Name = "TemizleTusu";
             this.TemizleTusu.Size = new System.Drawing.Size(94, 43);
             this.TemizleTusu.TabIndex = 2;
@@ -99,7 +99,6 @@ namespace Sudoku
             this.OrneklemSayisi.TabIndex = 7;
             this.OrneklemSayisi.Text = "40";
             this.OrneklemSayisi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.OrneklemSayisi.TextChanged += new System.EventHandler(this.OrneklemSayisi_TextChanged);
             this.OrneklemSayisi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OrneklemSayisi_KeyPress);
             // 
             // label2
